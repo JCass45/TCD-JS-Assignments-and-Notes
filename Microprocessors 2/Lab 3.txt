@@ -1,0 +1,124 @@
+AREA	AsmTemplate, CODE, READONLY
+	IMPORT	main
+
+; sample program makes the 4 LEDs P1.16, P1.17, P1.18, P1.19 go on and off in sequence
+; (c) Mike Brady, 2011.
+
+	EXPORT	start
+start
+
+
+
+IO1PIN 	EQU 0xE0028010
+IO1DIR	EQU	0xE0028018
+IO1SET	EQU	0xE0028014
+IO1CLR	EQU	0xE002801C
+	
+	
+IO0DIR	EQU	0xE0028008
+IO0SET	EQU	0xE0028004
+IO0CLR	EQU	0xE002800C
+
+	ldr	r1,=IO0DIR
+	ldr	r2,=0xFF00	;select P1.8--P1.15
+	str	r2,[r1]		;make them outputs
+	ldr	r1,=IO0SET
+	str	r2,[r1]		;set them to turn the LEDs off
+	ldr	r2,=IO0CLR
+; r1 points to the SET register
+; r2 points to the CLEAR register
+
+	    ldr	R10,=IO1PIN
+	
+; r1 points to the CLEAR register
+; r2 points to the SET register
+
+
+	    ldr r7, =0x00F00000  ; button mask
+		
+		ldr r11, =Numbers
+		ldrb r0, [r11]
+		
+		
+	
+
+polling
+		ldr r8,=0xFF00
+		str r8, [r2]
+		str r0, [R1]
+		
+polling_repeat		
+		ldr R4, [R10]
+		AND R5, R7, R4
+		
+		CMP R5, #0x00E00000
+		BEQ if1_20
+		
+		CMP R5, #0x00D00000
+		BEQ if1_21
+		
+		CMP R5, #0x00B00000
+		BEQ if1_22
+		
+		CMP R5, #0x00700000
+		BEQ if1_23
+
+		B	polling_repeat
+		
+		
+if1_20
+		ldr r9, =1
+		B addition
+		
+if1_21
+		
+		ldr r9, =3	
+		B addition
+if1_22
+		
+		ldr r9, =5
+		B subtraction
+if1_23	
+	
+		ldr r9, =7	
+		B subtraction
+		
+addition
+		cmp  r9, #0
+		BEQ polling
+		ldr r3, =0x7100
+		cmp r0, r3
+		BEQ set_to_zero
+		ldrb r0, [r10,#4]
+back_from_zero		
+		sub r9, #1
+		B addition
+
+subtraction
+		cmp r9, #0
+		BEQ polling
+		ldr r3, =0x3F00
+		cmp r0, r3
+		BEQ set_to_F
+		ldrb r0, [r10,#-4]
+back_from_F		
+		sub r9, #1
+		B subtraction
+		
+set_to_zero	
+		ldr r11, =Numbers
+		ldrb r0, [r11]
+		B back_from_zero
+		
+set_to_F
+		ldr r11, =Numbers
+		ldrb r0, [r11, #60]
+		B back_from_F
+
+	
+		
+stop	B	stop
+
+	AREA 	Data, CODE, READONLY
+Numbers DCD  0x3F00, 0x0600, 0x5B00, 0x4F00, 0x6600, 0x6D00, 0x7D00, 0x0700, 0x7F00, 0x6700, 0x3700, 0x7C00, 0x3900, 0x5E00, 0x7900, 0x7100
+	END

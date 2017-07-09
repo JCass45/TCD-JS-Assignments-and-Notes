@@ -1,0 +1,7 @@
+Use Promela to model variations of the Dining Phisophers problem and use SPIN to prove certain properties:
+
+Model a situation where there is only one philosopher at the table. Prove that no deadlock, starvation or livelock occurs.
+Prove that with two philosophers who are not seated beside one another, no deadlock, starvation or livelock occurs.
+Prove that deadlock can occur if just two philosophers are present, but seated beside one another.
+Prove that deadlock can occur with four philosophers.
+Prove that it is possible to solve the deadlock problem in all cases, but that livelock and starvation are possible.

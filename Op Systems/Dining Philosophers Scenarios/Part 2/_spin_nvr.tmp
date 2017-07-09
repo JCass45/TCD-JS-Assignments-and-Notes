@@ -1,0 +1,16 @@
+never livelock {    /* !(([] ((! (hungry[0])) || (<> (eating[0])))) && ([] ((! (hungry[1])) || (<> (eating[1]))))) */
+T0_init:
+	do
+	:: (! ((! (hungry[1]))) && ! ((eating[1]))) -> goto accept_S5
+	:: (! ((! (hungry[0]))) && ! ((eating[0]))) -> goto accept_S10
+	:: (1) -> goto T0_init
+	od;
+accept_S5:
+	do
+	:: (! ((eating[1]))) -> goto accept_S5
+	od;
+accept_S10:
+	do
+	:: (! ((eating[0]))) -> goto accept_S10
+	od;
+}
