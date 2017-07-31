@@ -6,7 +6,7 @@
 ### A dump of all my material and most of my assignments from throughout the year. :computer:
 
 Contains:
-* Notes from all modules. You'll need the [Lecture Notes](https://play.google.com/store/apps/details?id=com.acadoid.lecturenotes&hl=en) app to view them, unless you want to trawl through a shite load of PNG's.
+* Notes from all modules. You'll need the [Lecture Notes](https://play.google.com/store/apps/details?id=com.acadoid.lecturenotes&hl=en) app to view them.
 * Computer Architecture micro-processor project. **Not all instructions are completely working!** but worth 95% of the grade..
 * Networks socket and proxy labs
 * A few ARM labs
