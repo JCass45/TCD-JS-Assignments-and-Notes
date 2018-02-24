@@ -1,5 +1,5 @@
 # TCD-JS-Assignments-and-Notes :books:
-![Trinners](http://www.eventrocks.com/assets/trinity-college-dublin-ireland-logo_58521.gif)
+![tcd_photo](./tcd.jpg)
 
 [When you find all of your assignments online...](https://www.youtube.com/watch?v=GgINGJsAjA0&ab_channel=MarioMitchell)
 
